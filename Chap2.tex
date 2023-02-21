@@ -1,1 +1,150 @@
+\documentclass[12pt,letterpaper,reqno]{amsart}
+\setlength{\oddsidemargin}{.0in}
+\setlength{\evensidemargin}{.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.3in}
+\setlength{\headsep}{.20in}
+\setlength{\textheight}{9.in}
+%\usepackage[leqno]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+\usepackage{setspace}
+\doublespace
 
+
+%Here are some user-defined notations
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+
+%improving spacing in tables (space above and below characters in a row)
+\newcommand{\tfix}{\rule{0pt}{2.6ex}}
+\newcommand{\bfix}{\rule[-1.2ex]{0pt}{0pt}}
+
+
+%Here are commands with variable inputs 
+\newcommand{\intf}[1]{\int_a^b{#1}\,dx}
+\newcommand{\intfb}[3]{\int_{#1}^{#2}{#3}\,dx}
+\newcommand{\pln}[1]{$\sm${\tt #1}}
+\newcommand{\bgn}[1]{$\tt {\sm}begin\{#1\}$}
+\newcommand{\nd}[1]{$\tt {\sm}end\{#1\}$}
+\newcommand{\marginalfootnote}[1]{%
+        \footnote{#1}
+        \marginpar[\hfill{\sf\thefootnote}]{{\sf\thefootnote}}}
+\newcommand{\edit}[1]{\marginalfootnote{#1}}
+
+
+\newtheorem*{wellorder*}{Well Ordering Principle}
+%These commands deal with theorem-like environments (i.e., italic)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{wellorder}[theorem]{Well Ordering Principle}
+%\newtheorem{equation}{Theorem}[section]
+%These deal with definition-like environments (i.e., non-italic)
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{Exercise}{Exercise 2.}
+\newtheorem{exercise}{exercise 2.}
+
+%This numbers equations by section
+\numberwithin{equation}{section}
+%\numberwithin{equation}{Theorem}[section]
+
+
+%This is for hypertext references
+\usepackage{color}
+\usepackage{hyperref}
+
+
+
+
+\begin{document}
+\author{Zhizhong Pu}
+\title{Solutions - Chapter 2}
+\date{Feb 2023}
+\maketitle
+
+\thispagestyle{empty}
+
+%% 2.1
+\begin{Exercise} Find $\E[\E[\E[Y|X_1,X_2,X_3]|X_1,X_2]|X_1]$.
+
+    Since $\E[\E[Y|X_1,X_2,X_3]|X_1,X_2]=\E[Y|X_1,X_2]$ by LIE, then we have:
+    \[
+    \E[\E[\E[Y|X_1,X_2,X_3]|X_1,X_2]|X_1] = \E[\E[Y|X_1,X_2]|X_1] = \E[Y|X_1]
+    \]
+    
+\end{Exercise}
+
+%% 2.2
+\begin{Exercise} If $\E[Y|X]=a+bX$, find $\E[YX]$ as a function of moments of $X$.
+    Since $\E[Y|X]=a+bX$, we follow chapter 2.8 to define CEF error:
+    \[
+    e=Y-\E[Y|X]=Y-a+bX\Rightarrow Y=a+bX+e
+    \]
+    Then substitute $Y$ into $\E[YX]$:
+    \[
+    \E[YX]=\E[(a+bX+e)X]=a\E[X]+b\E[X^2]+\E[eX]
+    \]
+    Note that the last term is $0$ by Theorem 2.4.4, then
+    \[
+     \E[YX]=\E[(a+bX+e)X]=b\E[X^2]+a\E[X]
+    \]
+
+\end{Exercise}
+
+%% 2.3 
+\begin{Exercise}
+Prove Theorem 2.4.4 using the law of iterated expectations: for any function $h(x)$ such that $\E|h(X)e|<\infty$ then $\E[h(X)e]=0$
+    \begin{proof} Wooldridge (2010) CE.6 Proof
+
+    Given any function h(), we can write
+    \[
+    E[h(X)e]=\E[\E(h(X)e|X)]=\E[h(X)\E(e|X)]=\E[h(X)0]=0
+    \]
+    using LIE, take-out-what's-known property, and $\E(e|X)=0$ from Theorem 2.4.1, respectively.
+    \end{proof}
+\end{Exercise}
+
+%% 2.4
+\begin{Exercise} See book
+
+By the definition of conditional expectation:
+\[
+    \E[Y|X=0]=\sum_{y\in{0,1}}yP(Y=y|X=0)=1P(Y=1|X=0)=0.8 
+\]
+\[
+    \E[Y|X=1]=\sum_{y\in{0,1}}yP(Y=y|X=1)=1P(Y=1|X=1)=0.6
+\]
+(Note that LIE can be verified: $\E[\E[Y|X]]=0.7=\E[Y]$)
+
+By LOTUS:
+\[
+    \E[Y^2|X=0]=\sum_{y\in{0,1}}y^2P(Y=y|X=0)=1P(Y=1|X=0)=0.8 \\
+\]
+\[
+    \E[Y^2|X=1]=\sum_{y\in{0,1}}y^2P(Y=y|X=1)=1P(Y=1|X=1)=0.6
+\]
+
+By definition of conditional variance:
+\[
+    Var(Y|X=0)=\E[Y^2|X=0]-(\E[Y|X=0])^2=0.8-(0.8)^2=0.16
+\]
+\[
+    Var(Y|X=1)=\E[Y^2|X=1]-(\E[Y|X=1])^2=0.6-(0.6)^2=0.24
+\]
+
+\end{Exercise}
+
+
+\end{document}	
