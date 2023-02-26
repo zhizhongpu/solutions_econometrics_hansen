@@ -5,13 +5,13 @@
 \setlength{\topmargin}{-.3in}
 \setlength{\headsep}{.20in}
 \setlength{\textheight}{9.in}
-%\usepackage[leqno]{amsmath}
+\usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{amssymb}
 \usepackage[all]{xy}
 \usepackage{graphicx}
+
 \usepackage{setspace}
 \doublespace
 
@@ -108,9 +108,9 @@
 Prove Theorem 2.4.4 using the law of iterated expectations: for any function $h(x)$ such that $\E|h(X)e|<\infty$ then $\E[h(X)e]=0$
     \begin{proof} Wooldridge (2010) CE.6 Proof
 
-    Given any function h(), we can write
+    Given any function $h()$, we can write
     \[
-    E[h(X)e]=\E[\E(h(X)e|X)]=\E[h(X)\E(e|X)]=\E[h(X)0]=0
+    \E[h(X)e]=\E[\E(h(X)e|X)]=\E[h(X)\E(e|X)]=\E[h(X)0]=0
     \]
     using LIE, take-out-what's-known property, and $\E(e|X)=0$ from Theorem 2.4.1, respectively.
     \end{proof}
@@ -143,7 +143,64 @@ By definition of conditional variance:
 \[
     Var(Y|X=1)=\E[Y^2|X=1]-(\E[Y|X=1])^2=0.6-(0.6)^2=0.24
 \]
+\end{Exercise}
 
+
+
+
+
+
+
+%% 2.5
+\begin{Exercise} Show that $\sigma^2(X)$ is the best predictor of $e^2$ given $X$
+
+Not sure how to prove this yet
+
+\end{Exercise} 
+
+%% 2.6
+
+\begin{Exercise} Use $Y=m(X)+e$ to show that $Var(Y)=Var[(m(X)]+\sigma^2$. 
+
+*Note on notation: $\sigma^2=\E[e^2]$. 
+
+Consider the LHS. By definition of variance:
+\[
+    Var(Y)=Var[m(X)+e]=\E[(m(X)+e)^2]-(\E[m(X)+e])^2
+\]
+The first term is (using $\E[m(X)e]=0$ from Theorem 2.4.4.):
+\[
+    \E[(m(X)+e)^2]=\E[m^2(X)]+2\E[m(X)e]+\E[e^2]=\E[m^2(X)]+\E[e^2]
+\]
+The second term is (using 0 unconditional mean of error term):
+\[
+    -(\E[m(X)+e])^2=-(\E[m(X)]+\E[e])^2=-(\E[m(X)]+0)^2=-\E[m(X)]^2
+\]
+Sum up the two terms:
+\[
+    Var(Y)=\E[(m(X)+e)^2]-(\E[m(X)+e])^2=\E[m^2(X)]+\E[e^2]-\E[m(X)]^2=Var[(m(X)]+\sigma^2
+\]
+
+
+\end{Exercise} 
+
+
+%% 2.7
+
+\begin{Exercise} Show that the conditional variance can be written as $\sigma^2(X)=\E[Y^2|X]-\E[Y|X]^2$
+
+By definition 2.1, we can write
+\[\begin{split}
+    \sigma^2(X) & \equiv Var(Y|X) = \E[(Y-\E(Y|X))^2|X] \\
+    & = \E[Y^2-2Y\E(Y|X)+\E(Y|X)^2|X] \\
+    & = \E[Y^2|X] - 2\E[Y\E(Y|X)|X] + \E[\E(Y|X)^2|X]
+\end{split}\]
+
+Note that in the last two terms, $\E(Y|X)$ and $\E(Y|X)^2$ are both functions of X, so we can apply take-out-what's-known property:
+\[
+    = \E[Y^2|X] - 2\E(Y|X)\E(Y|X) + \E(Y|X)^2\E[1|X] = \E[Y^2|X] - \E(Y|X)^2
+\]
+    
 \end{Exercise}
 
 
