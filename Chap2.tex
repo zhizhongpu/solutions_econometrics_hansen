@@ -146,15 +146,8 @@ By definition of conditional variance:
 \end{Exercise}
 
 
-
-
-
-
-
 %% 2.5
 \begin{Exercise} Show that $\sigma^2(X)$ is the best predictor of $e^2$ given $X$
-
-Not sure how to prove this yet
 
 \end{Exercise} 
 
@@ -203,5 +196,68 @@ Note that in the last two terms, $\E(Y|X)$ and $\E(Y|X)^2$ are both functions of
     
 \end{Exercise}
 
+% 2.8
+\begin{Exercise}
+\end{Exercise}
+
+% 2.9
+\begin{Exercise}
+\end{Exercise}
+
+% 2.10
+\begin{Exercise} True or False. If $Y = X\beta+e$, $X \in \R$, and $\E[e|X] = 0$, then $\E[X^2e]=0$.
+    True. 
+    \[
+        \E[X^2e]=\E[\E[X^2e|X]]=\E[X^2\E[e|X]]=\E[0X^2]=0
+    \]
+\end{Exercise}
+
+% 2.11
+\begin{Exercise}
+\end{Exercise}
+
+% 2.12
+\begin{Exercise}
+\end{Exercise}
+
+% 2.13
+\begin{Exercise}
+\end{Exercise}
+
+% 2.14
+\begin{Exercise}
+\end{Exercise}
+
+% 2.15
+
+\begin{Exercise} Consider the intercept-only model $Y = a + e$ with $a$ the best linear predictor. Show that
+$a = \E[Y]$. 
+
+We can write MSE as:
+\[\begin{split}
+    \E[e^2] =  \E[(Y-a)^2] = \E[Y^2]-2a\E[Y]+a^2
+\end{split}\]
+Apply the first order condition:
+\[
+    \frac{\partial}{\partial a} \E[e^2] = -2\E[Y]+2a \equiv 0
+\]
+This shows $a = \E[Y]$. 
+\end{Exercise}
+
+% 2.16
+\begin{Exercise}
+
+I do not recommend this problem for calculations are complicated. 
+
+
+\[
+    \beta=E(XX')^{-1}(XY)=\frac{\E(XY)}{\E(X^2)}=\frac{7}{16} \cdot \frac{15}{7} = \frac{15}{16} 
+\]
+
+\[
+    \E[Y|X]= \int_{0}^{1} y \cdot f_{Y|X}(y|x) \,dy = \int_{0}^{1} y \frac{x^2+y^2}{x^2+\frac{1}{3}} \,dy = \frac{6x^2+3}{12x^2+4}
+\]
+
+\end{Exercise}
 
 \end{document}	
