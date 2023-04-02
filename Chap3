@@ -1,0 +1,262 @@
+\documentclass[12pt,letterpaper,reqno]{amsart}
+\setlength{\oddsidemargin}{.0in}
+\setlength{\evensidemargin}{.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.3in}
+\setlength{\headsep}{.20in}
+\setlength{\textheight}{9.in}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+\usepackage{setspace}
+\doublespace
+
+
+%Here are some user-defined notations
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\newcommand{\I}{\mathbb I}
+
+%improving spacing in tables (space above and below characters in a row)
+\newcommand{\tfix}{\rule{0pt}{2.6ex}}
+\newcommand{\bfix}{\rule[-1.2ex]{0pt}{0pt}}
+
+
+%Here are commands with variable inputs 
+\newcommand{\intf}[1]{\int_a^b{#1}\,dx}
+\newcommand{\intfb}[3]{\int_{#1}^{#2}{#3}\,dx}
+\newcommand{\pln}[1]{$\sm${\tt #1}}
+\newcommand{\bgn}[1]{$\tt {\sm}begin\{#1\}$}
+\newcommand{\nd}[1]{$\tt {\sm}end\{#1\}$}
+\newcommand{\marginalfootnote}[1]{%
+        \footnote{#1}
+        \marginpar[\hfill{\sf\thefootnote}]{{\sf\thefootnote}}}
+\newcommand{\edit}[1]{\marginalfootnote{#1}}
+
+
+\newtheorem*{wellorder*}{Well Ordering Principle}
+%These commands deal with theorem-like environments (i.e., italic)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{wellorder}[theorem]{Well Ordering Principle}
+%\newtheorem{equation}{Theorem}[section]
+%These deal with definition-like environments (i.e., non-italic)
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{Exercise}{Exercise 3.}
+\newtheorem{exercise}{exercise 3.}
+
+%This numbers equations by section
+\numberwithin{equation}{section}
+%\numberwithin{equation}{Theorem}[section]
+
+
+%This is for hypertext references
+\usepackage{color}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+
+
+\begin{document}
+\author{Zhizhong Pu}
+\title{Solutions - Chapter 3}
+\date{March 2023}
+\maketitle
+
+\thispagestyle{empty}
+
+%% 3.1
+\begin{Exercise} Question see book.
+
+    Since 
+    \[
+        \Bar{g_n}(y_i, \hat{\mu}, \hat{\sigma^2}) = \mathbf{0} = n^{-1}\sum_{i=1}^n g(y_i, \hat{\mu}, \hat{\sigma^2}) = n^{-1}\sum_{i=1}^n
+        \begin{bmatrix} 
+        y_i - \hat{\mu} \\
+        (y_i - \hat{\mu})^2 - \hat{\sigma^2} 
+        \end{bmatrix}
+    \]
+
+    This is equivalent to 
+    \[ \mathbf{0} =
+     \begin{bmatrix} 
+       \sum_{i=1}^n (y_i - \hat{\mu}) \\
+       \sum_{i=1}^n ((y_i - \hat{\mu})^2 - \hat{\sigma^2} )
+        \end{bmatrix}
+    \]
+    which then implies 
+    \[
+    \hat{\mu} = n^{-1} \sum_{i=1}^n y_i
+    \]
+    \[
+    \hat{\sigma^2} = n^{-1} \sum_{i=1}^n ((y_i - \hat{\mu})^2
+    \]
+    in which the RHS are the sample mean and variance.
+
+    
+    
+\end{Exercise}
+
+%% 3.2
+\begin{Exercise} Question see book.
+
+    First: regressing $Y$ on $X$ yields the OLS regression coefficient $\beta = (X'X)^{-1}X'Y$
+    
+    Now let $\gamma$ represent the regression coefficients of $Y$ on $Z=XC$.Then
+    \[
+        \gamma = (Z'Z)^{-1}Z'Y = (C'X'XC)^{-1}C'X'Y = C^{-1}(X'X)^{-1}C'^{-1}C'X'Y = C^{-1}(X'X)^{-1}X'Y = C^{-1}\beta
+    \]
+\end{Exercise}
+
+%% 3.3 
+\begin{Exercise} Using matrix algebra, show $X'\hat{e}=0$
+    
+    Since $Y=X\beta + e$, then $\hat{e} = Y - \hat{T} = Y-X\beta$
+    
+    Then we can write:
+    \[
+    X'\hat{e}=X'Y-X'X(X'X)^{-1}X'Y = X'Y -X'Y =0
+    \]
+\end{Exercise}
+
+%% 3.4
+\begin{Exercise} Let $\hat{e}$ be the OLS residual from a regression of $Y$ on $X = \begin{bmatrix} X_1 & X_2 \end{bmatrix} $. Find $X_2'\hat{e}$.
+
+    Note that 
+    \[
+        X'\hat{e} = 0_{k\times 1} = \begin{bmatrix} X_1 & X_2 \end{bmatrix} \hat{e} = 
+        \begin{bmatrix} X_1' \\ X_2' \end{bmatrix} \hat{e} = \begin{bmatrix} X_1' \hat{e} \\ X_2' \hat{e} \end{bmatrix}
+    \]
+    
+    where RHS is $k \times 1$, so $X_2'\hat{e} = 0$
+\end{Exercise}
+
+% 3.5
+\begin{Exercise} Question see book.
+
+    Note that 
+    \[
+        X'\hat{e} = X'(Y-\hat{Y}) = X'Y - X'X\hat{\beta} = X'Y - X'X(X'X)^{-1}X'Y = 0_{k\times 1}
+    \]
+    
+    Then we can write the OLS coefficient $\gamma$ of $\hat{e}$ on $X$ as:
+    \[
+        \gamma = (X'X)^{-1}X'\hat{e} = 0_{k\times 1}
+    \]
+\end{Exercise} 
+
+%% 3.6
+\begin{Exercise} Let $\hat{Y} = X(X'X)^{-1}X'Y$. Find OLS regression coefficients of $\hat{Y}$ on $X$
+
+    Apply the regression coefficient formula, we can write the coefficient $\theta$:
+    \[
+        \theta = (X'X)^{-1}X'\hat{Y} = (X'X)^{-1}X'X(X'X)^{-1}X'Y = \I_n(X'X)^{-1}X'Y = (X'X)^{-1}X'Y
+    \]
+    which is the coefficient vector from regressing $Y$ on $X$
+\end{Exercise} 
+
+
+%% 3.7
+\begin{Exercise} Show that if $ X = \begin{bmatrix} X_1 & X_2 \end{bmatrix} $ then $PX_1 = X_1$ and $ MX_1 = 0 $
+
+    By (3.21) we know that $MX=0$ where the RHS is $n \times k$, then
+    \[
+        0_{n \times k} = MX = M \begin{bmatrix} X_1 & X_2 \end{bmatrix} = \begin{bmatrix} MX_1 & MX_2 \end{bmatrix}
+    \]
+    This proves $ MX_1 = 0 $. Note that by definition $M = \I_n - P$, and thus naturally $PX_1 = X_1$ 
+\end{Exercise}
+
+% 3.8
+\begin{Exercise} Show that $M = \I_n - P$ is idempotent: $MM=M$
+
+    Since $P$ is idempotent: 
+    \[
+        MM = (\I_n - P)(\I_n - P) = \I_n - \I_nP - P\I_n + PP = \I_n - 2P + P = \I_n - P = M
+    \]
+\end{Exercise}
+
+% 3.9
+\begin{Exercise} Show that $tr(M) = n - k$.
+
+    By definition: $M = I_n - P$, so $M+P=I_n$, so $tr(M+P)=tr(M)+tr(P)=tr(I_n)$
+    
+    Since $tr(I_n) = n$ and $tr(P)=k$ from Theorem 3.3.3, then $tr(M) = n - k $
+\end{Exercise}
+
+% 3.10
+\begin{Exercise} Show that if $X = \begin{bmatrix} X_1 & X_2 \end{bmatrix}$ and $X_1'X_2=0$ then $P=P_1+P_2$
+
+    By definition: 
+    \[
+        P = X(X'X)^{-1}X', P_1 = X_1(X_1'X_1)^{-1}X_1', P_2 = X_2(X_2'X_2)^{-1}X_2'
+    \]
+    
+    Then we can write 
+    \[
+        P = \begin{bmatrix} X_1 & X_2 \end{bmatrix} (\begin{bmatrix} X_1' \\ X_2' \end{bmatrix} 
+     \begin{bmatrix} X_1 & X_2 \end{bmatrix})^{-1} \begin{bmatrix} X_1' \\ X_2' \end{bmatrix} = \begin{bmatrix} X_1 & X_2 \end{bmatrix} (\begin{bmatrix} X_1'X_1 & X_1'X_2 \\ X_2'X_1 & X_2'X_2 \end{bmatrix} 
+     )^{-1} \begin{bmatrix} X_1' \\ X_2' \end{bmatrix}
+    \]
+    
+    Note that $X_1'X_2=0$ implies $X_2'X_1=0$, so
+    \[\begin{split}
+    P & = \begin{bmatrix} X_1 & X_2 \end{bmatrix} (\begin{bmatrix} X_1'X_1 & 0 \\ 0 & X_2'X_2 \end{bmatrix} )^{-1} \begin{bmatrix} X_1' \\ X_2' \end{bmatrix} \\
+    & = \begin{bmatrix} X_1 & X_2 \end{bmatrix} \begin{bmatrix} (X_1'X_1)^{-1} & 0 \\ 0 & (X_2'X_2)^{-1} \end{bmatrix}  \begin{bmatrix} X_1' \\ X_2' \end{bmatrix} \\ 
+    & = X_1(X_1'X_1)^{-1}X_1' + X_2(X_2'X_2)^{-1}X_2' \\ 
+    & = P_1 + P_2
+    \end{split}\]
+\end{Exercise}
+
+% 3.11
+\begin{Exercise} Show that when $X$ contains a constant, $n^{-1}\sum_{i=1}^{n}\hat{Y}_i=\Bar{Y}$
+
+We know from equation 3.17 (\href{https://math.stackexchange.com/a/2566727/984145}{proof}) that $n^{-1}\sum\hat{e}_i = 0 $ when $X$ contains a constant, then
+\[\begin{split}
+    & \Rightarrow n^{-1}\sum{Y}_i-\hat{Y}_i = 0 \\
+    & \Rightarrow n^{-1}\sum{Y}_i = \Bar{Y}
+\end{split} \]
+
+\end{Exercise}
+
+% 3.12
+\begin{Exercise}
+\end{Exercise}
+
+% 3.13
+\begin{Exercise}
+\end{Exercise}
+
+% 3.14 
+\begin{Exercise} Question see book. Proof incomplete.
+
+\[\begin{split}
+    \beta_{n+1} & =   \begin{pmatrix} \begin{pmatrix} X_n \\ X_{n+1} \end{pmatrix} '\begin{pmatrix} X_n \\ X_{n+1} \end{pmatrix} \end{pmatrix}^{-1}\begin{pmatrix} X_n \\ X_{n+1} 
+\end{pmatrix}'\begin{pmatrix} Y_n \\ Y_{n+1} \end{pmatrix} \\
+& = \begin{pmatrix} \begin{pmatrix} X_n' & X_{n+1}' \end{pmatrix} \begin{pmatrix} X_n \\ X_{n+1} \end{pmatrix} \end{pmatrix}^{-1}\begin{pmatrix} X_n' & X_{n+1}' \end{pmatrix} \begin{pmatrix} Y_n \\ Y_{n+1} \end{pmatrix}  \\
+& = (X_n'X_n + X_{n+1}'X_{n+1})^{-1}(X_n'X_n +  X_{n+1}'Y_{n+1})
+\end{split}\]
+ 
+
+\end{Exercise}
+
+\end{document}	
