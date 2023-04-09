@@ -1,0 +1,250 @@
+\documentclass[12pt,letterpaper,reqno]{amsart}
+\setlength{\oddsidemargin}{.0in}
+\setlength{\evensidemargin}{.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.3in}
+\setlength{\headsep}{.20in}
+\setlength{\textheight}{9.in}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+\usepackage{setspace}
+\doublespace
+
+
+%Here are some user-defined notations
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\newcommand{\I}{\mathbb I}
+
+%improving spacing in tables (space above and below characters in a row)
+\newcommand{\tfix}{\rule{0pt}{2.6ex}}
+\newcommand{\bfix}{\rule[-1.2ex]{0pt}{0pt}}
+
+
+%Here are commands with variable inputs 
+\newcommand{\intf}[1]{\int_a^b{#1}\,dx}
+\newcommand{\intfb}[3]{\int_{#1}^{#2}{#3}\,dx}
+\newcommand{\pln}[1]{$\sm${\tt #1}}
+\newcommand{\bgn}[1]{$\tt {\sm}begin\{#1\}$}
+\newcommand{\nd}[1]{$\tt {\sm}end\{#1\}$}
+\newcommand{\marginalfootnote}[1]{%
+        \footnote{#1}
+        \marginpar[\hfill{\sf\thefootnote}]{{\sf\thefootnote}}}
+\newcommand{\edit}[1]{\marginalfootnote{#1}}
+
+
+\newtheorem*{wellorder*}{Well Ordering Principle}
+%These commands deal with theorem-like environments (i.e., italic)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{wellorder}[theorem]{Well Ordering Principle}
+%\newtheorem{equation}{Theorem}[section]
+%These deal with definition-like environments (i.e., non-italic)
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{Exercise}{Exercise 4.}
+\newtheorem{exercise}{exercise 3.}
+
+%This numbers equations by section
+\numberwithin{equation}{section}
+%\numberwithin{equation}{Theorem}[section]
+
+
+%This is for hypertext references
+\usepackage{color}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\begin{document}
+\author{Zhizhong Pu}
+\title{Solutions - Chapter 4}
+\date{April 2023}
+\maketitle
+
+\thispagestyle{empty}
+
+%% 4.1
+\begin{Exercise} For some integer $k$, set $\mu_k=\E[Y^k]$.
+
+    (a) Construct an estimator $\hat{\mu_k}$ for $\mu_k$.
+
+    Let $Y_i$ be the realized values of random variable $Y$, then the moment estimator $\hat{\mu_k}$ for $\mu_k$ is $\hat{\mu_k} = n^{-1}\sum_{i=1}^n(Y_i^k)$
+
+    (b) Show that $\hat{\mu_k}$ is unbiased for $\mu_k$.
+    \[
+    \E[\hat{\mu_k}] = n^{-1}n\E[Y_i^k] = \E[Y_i^k] = \mu_k
+    \]
+    (c) Calculate $Var(\hat{\mu_k})$. What assumption is needed for $Var(\hat{\mu_k})$ to be finite?
+    
+    Note that my $\hat{\mu_k}$ can be seen as the single-variable (intercept) linear regression coefficient. Then Theorem 4.3 applies and states that $Var(\hat{\mu_k})<\infty$ iff $2k<n-1+1$ (i.e. $k < \frac{n}{2}$) 
+
+    (d) Propose an estimator of $Var(\hat{\mu_k})$.
+    
+    I propose the bias-corrected sample variance:
+    \[
+    \widehat{\sigma^2} = \frac{1}{n-1}\sum_{i=1}^n(Y_i^2k-\overline{Y^k})^2
+    \]
+    
+\end{Exercise}
+
+%% 4.2
+\begin{Exercise}
+
+\end{Exercise}
+
+%% 4.3 
+\begin{Exercise} Question see book.
+
+    The former is sample mean, which is a random variable, while the latter is population mean / expectation, which is a fixed parameter. 
+\end{Exercise}
+
+%% 4.4
+\begin{Exercise} Question see book.
+
+    False. Note: since $X\in \R$, then $\hat{\beta_{OLS} } = \frac{\sum_{i=1}^n X_iY_i}{\sum_{i=1}^n X_i^2} $. Then
+    \[
+    \sum_{i=1}^n X_i^2\widehat{e_i} = \sum_{i=1}^n X_i^2(Y_i-X_i\hat{\beta}) = \sum_{i=1}^n X_i^2Y_i - \sum_{i=1}^n (X_i^3 \frac{\sum_{i=1}^n X_iY_i}{\sum_{i=1}^n X_i^2} )
+    \]
+    which is not $0$ in general.
+\end{Exercise}
+
+% 4.5
+\begin{Exercise} Prove (4.20) and (4.21).
+
+    (4.20) follows naturally from the unbiasedness property of OLS, as (4.17) specifies the standard OLS model $Y=X\beta+e$. To show (4.21):
+    \[\begin{split}
+        Var(\hat{\beta}|X) & = Var((X'X)^{-1}X'Y|X) \\ 
+        & = (X'X)^{-1}X' Var(X\beta+e|X) X (X'X)^{-1} \\ 
+        & = (X'X)^{-1}X' Var(e|X) X (X'X)^{-1} \\
+        & = \sigma^2 (X'X)^{-1} (X' \Sigma X) (X'X)^{-1}
+    \end{split}\]
+    with the last equation holding for we are given $Var(e|X) = \Sigma \sigma^2 $.
+\end{Exercise} 
+
+%% 4.6
+\begin{Exercise} Prove Theorem 4.5 under the restriction to linear estimators.
+
+    For any linear estimator $\Tilde{\beta}$ there must exist $A_{n \times k}$ that is a function of $X$ such that $\Tilde{\beta} = A'Y$. Note that following the OLS G-M Theorem proof, we know that the unbiasedness of $\Tilde{\beta}$ guarantees $A'X=I_k$. Also following the OLS-GM proof:
+    \[
+    Var(\Tilde{\beta}|X) = Var(A'Y|X) = A' Var(e|X) A = \sigma^2 A'\Sigma A
+    \]
+    with the last equation holding for we are given $Var(e|X) = \Sigma \sigma^2 $.
+    
+    Now, let $C = \Sigma^{\frac{1}{2}}A - \Sigma^{-\frac{1}{2}} X (X' \Sigma^{-1} X )^{-1} $ so that $ 0 \leqslant  C'C = A'\Sigma A - (X' \Sigma^{-1} X)^{-1} $. It follows that 
+    \[
+        Var(\Tilde{\beta}|X) = \sigma^2 A'\Sigma A \geqslant  \sigma^2 (X' \Sigma^{-1} X)^{-1}
+    \]
+\end{Exercise} 
+
+%% 4.7
+\begin{Exercise} 
+\end{Exercise}
+
+% 4.8
+\begin{Exercise} 
+\end{Exercise}
+
+% 4.9
+\begin{Exercise} Show (4.32) in the homoskedastic regression model.
+
+    Note that with homoskedasticity, equation (4.27) holds, which states $\E[\widehat{e_i^2}|X] = (1-h_i)\sigma^2$. Then:
+    \[\begin{split}
+        \E[\overline{\sigma^2}|X] & = \E[n^{-1}\sum_{i=1}^n(1-h_i)^{-1}\widehat{e_i^2}|X] \\
+        & = n^{-1}(1-h_i)^{-1}\sum_{i=1}^n\E[\widehat{e_i^2}|X] \\
+        & = \sigma^2
+    \end{split}\]
+    Note that $(1-h_i)$ can be taken out of conditional expectations on $X$ since $h_i$ is a function of $X$
+\end{Exercise}
+
+% 4.10
+\begin{Exercise} Prove (4.40)
+
+    Recall
+    \[
+    V_{\hat{\beta}}^{HC0} = (X'X)^{-1} (\sum_{i=1}^n X_iX_i' \widehat{e_i^2} ) (X'X^{-1}) 
+    \]
+    \[
+    V_{\hat{\beta}}^{HC2} = (X'X)^{-1} (\sum_{i=1}^n (1-h_i)^{-1} X_iX_i' \widehat{e_i^2} ) (X'X)^{-1}
+    \]
+    \[
+    V_{\hat{\beta}}^{HC3} = (X'X)^{-1} (\sum_{i=1}^n (1-h_i)^{-2} X_iX_i' \widehat{e_i^2} ) (X'X)^{-1}
+    \]
+    Then:
+    \[
+    V_{\hat{\beta}}^{HC2} - V_{\hat{\beta}}^{HC0} = (X'X)^{-1} [\sum_{i=1}^n ((1-h_i)^{-1} - 1) \widehat{e_i^2} X_iX_i' ] (X'X^{-1}) 
+    \]
+    \[
+    V_{\hat{\beta}}^{HC3} - V_{\hat{\beta}}^{HC2} = (X'X)^{-1} [\sum_{i=1}^n ((1-h_i)^{-2} - (1-h_i)^{-1} ) \widehat{e_i^2} X_iX_i' ] (X'X^{-1}) 
+    \]
+    Note that $(1-h_i) \in [0,1] $ by Theorem 3.6, so $ (1-h_i)^{-2} \geqslant (1-h_i)^{-1} \geqslant 1 $, then the middle term in each of the last two equations is each a weighted sum of $n$ PSD matrices $X_iX_i'$ with no negative weights. As a result, each middle term is a PSD matrix so 
+    \[
+    V_{\hat{\beta}}^{HC3} \geqslant V_{\hat{\beta}}^{HC2} \geqslant V_{\hat{\beta}}^{HC0}
+    \]
+\end{Exercise} 
+
+% 4.11
+\begin{Exercise} Show (4.41) in the homoskedastic regression model, i.e. $\E[V_{\hat{\beta}}^{HC2}|X] = \sigma^2$.
+
+    First note that in the book notations, $X'X= \sum X_iX_i'$. Then
+    \[\begin{split}
+            \E[V_{\hat{\beta}}^{HC2}|X] & = \E[(X'X)^{-1} (\sum_{i=1}^n (1-h_i)^{-1} X_iX_i' \widehat{e_i^2} |X] \\
+            & = (X'X)^{-1} ( \sum_{i=1}^n (1-h_i)^{-1} \E[\widehat{e_i^2}|X] X_iX_i' ) (X'X)^{-1} \\
+            & = (X'X)^{-1} ( \sum_{i=1}^n (1-h_i)^{-1} (1-h_i) \sigma^2 X_iX_i' ) (X'X)^{-1} \\
+            & = \sigma^2 (X'X)^{-1} ( \sum_{i=1}^n  X_iX_i' ) (X'X)^{-1} \\ 
+            & = \sigma^2 (X'X)^{-1} (X'X) (X'X)^{-1} \\
+            & = \sigma^2 (X'X)^{-1}
+    \end{split}\]
+    with third equality true due to equation (4.27) under homoskedasticity. Note that $(1-h_i)$ can be taken out of conditional expectations on $X$ since $h_i$ is a function of $X$.
+\end{Exercise}
+
+% 4.12
+\begin{Exercise}
+\end{Exercise}
+
+% 4.13
+\begin{Exercise}
+\end{Exercise}
+
+% 4.14 
+\begin{Exercise} 
+\end{Exercise}
+
+% 4.15 
+\begin{Exercise} Question see book.
+
+    (a) Find $V_{\hat{\beta}} = Var(\widehat{\beta})$.
+
+    Since we know $X'X=n\I_k$, which means $(X'X)^{-1} = n^{-1} \I_k$. Also, since we assume an i.i.d. random sample, then $Var(e|X) = \sigma^2 \I $. Now consider the conditional variance:
+    \[\begin{split}
+        Var(\widehat{\beta} |X) & = Var( (X'X)^{-1}X'e |X) \\
+        & = (X'X)^{-1}X' Var(e|X) X(X'X)^{-1} \\
+        & = n^{-2} X' Var(e|X) X \\
+        & = \frac{\sigma^2}{n}
+    \end{split}\]
+    Then then unconditional variance is given by LOTV:
+    \[
+        Var(\widehat{\beta}) = Var(\E[\widehat{\beta}|X] + \E[Var(\widehat{\beta}|X)] = \frac{\sigma^2}{n}
+    \]
+\end{Exercise}
+
+\end{document}	
