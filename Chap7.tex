@@ -1,0 +1,160 @@
+\documentclass[12pt,letterpaper,reqno]{amsart}
+\setlength{\oddsidemargin}{.0in}
+\setlength{\evensidemargin}{.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.3in}
+\setlength{\headsep}{.20in}
+\setlength{\textheight}{9.in}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+\usepackage{setspace}
+\doublespace
+
+
+%Here are some user-defined notations
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\newcommand{\I}{\mathbb I}
+
+%improving spacing in tables (space above and below characters in a row)
+\newcommand{\tfix}{\rule{0pt}{2.6ex}}
+\newcommand{\bfix}{\rule[-1.2ex]{0pt}{0pt}}
+
+
+%Here are commands with variable inputs 
+\newcommand{\intf}[1]{\int_a^b{#1}\,dx}
+\newcommand{\intfb}[3]{\int_{#1}^{#2}{#3}\,dx}
+\newcommand{\pln}[1]{$\sm${\tt #1}}
+\newcommand{\bgn}[1]{$\tt {\sm}begin\{#1\}$}
+\newcommand{\nd}[1]{$\tt {\sm}end\{#1\}$}
+\newcommand{\marginalfootnote}[1]{%
+        \footnote{#1}
+        \marginpar[\hfill{\sf\thefootnote}]{{\sf\thefootnote}}}
+\newcommand{\edit}[1]{\marginalfootnote{#1}}
+
+
+\newtheorem*{wellorder*}{Well Ordering Principle}
+%These commands deal with theorem-like environments (i.e., italic)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{wellorder}[theorem]{Well Ordering Principle}
+%\newtheorem{equation}{Theorem}[section]
+%These deal with definition-like environments (i.e., non-italic)
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{Exercise}{Exercise 7.}
+
+%This numbers equations by section
+\numberwithin{equation}{section}
+%\numberwithin{equation}{Theorem}[section]
+
+
+%This is for hypertext references
+\usepackage{color}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\begin{document}
+\author{Zhizhong Pu}
+\title{Solutions - Chapter 7}
+\date{April 2023}
+\maketitle
+
+\thispagestyle{empty}
+
+%% 4.1
+\begin{Exercise} Question see book. 
+
+   Given the DGS: $Y=X_1'\beta_1+X_2'\beta_2+e$ with $\E[Xe]=0$, regressing $Y$ on $X_1$ only yields 
+   \[\begin{split}
+     \hat{\beta_1} & = (X_1X_1')^{-1}X_1Y \\ 
+    & = (X_1X_1')^{-1}X_1(X_1'\beta_1+X_2'\beta_2+e) \\ 
+    & = \beta_1 + (X_1X_1')^{-1}(X_1X_2'\beta_2) + (X_1X_1')^{-1}(X_1e) \\
+    & = \beta_1 + (\frac{1}{n} \sum_{i=1}^n X_{1i} X_{1i}')^{-1} (\frac{1}{n} \sum_{i=1}^n X_{1i} X_{2i}' )\beta_2 + (\frac{1}{n} \sum_{i=1}^n X_{1i} X_{1i}')^{-1} (\frac{1}{n} \sum_{i=1}^n X_{1i} e_i)
+    \end{split}\]
+   Note that by WLLN, we have 
+
+   \begin{enumerate}
+        \item $(\frac{1}{n} \sum_{i=1}^n X_{1i} X_{1i}')^{-1} \rightarrow \E[X_1X_1']^{-1}$
+        
+        \item $\frac{1}{n} \sum_{i=1}^n X_{1i} e_i \rightarrow \E[X_1e] = 0$
+        
+        \item $\frac{1}{n} \sum_{i=1}^n X_{1i} X_{2i}' \rightarrow \E[X_1X_2']$ if $\E[X_1X_2']<\infty$
+        
+   \end{enumerate}
+   
+   Then $\hat{\beta_1}$ is generally not consistent, and it is consistent iff $\E[X_1X_2'] = 0$ or $\beta_2 = 0$
+    
+\end{Exercise}
+
+%% 7.2
+\begin{Exercise}\end{Exercise}
+
+%% 7.3
+\begin{Exercise}\end{Exercise}
+
+%% 7.4
+\begin{Exercise}\end{Exercise}
+
+%% 7.5
+\begin{Exercise}\end{Exercise}
+
+%% 7.6
+\begin{Exercise} Full problem see book. Find the method of moments estimators $(\hat{\beta},\hat{\Omega})$ for $(\beta,\Omega)$ where $\Omega = \E[XX'e^2]$.
+
+    Since $\hat{\beta} = \E[XX']\E[XY]$, then we could substitute in the sample moment for population moment: $\hat{\beta}_{MoM} = (\frac{1}{n} \sum_{i=1}^n X_i X_i')^{-1} (\frac{1}{n} \sum_{i=1}^n X_i Y_i') $. And we can do the same for $\Omega$:
+    \[
+        \hat{\Omega}_{MoM} = (\frac{1}{n} \sum_{i=1}^n X_i X_i' e_i^2)
+    \]
+    
+
+\end{Exercise}
+
+%% 7.7
+\begin{Exercise}\end{Exercise}
+
+%% 7.8
+\begin{Exercise} Find the asymptotic distribution of $\sqrt{n}(\widehat{\sigma^2} - \sigma^2)$ as $n \rightarrow \infty$
+
+    First, we can re-write:
+   \[\begin{split}
+     \sqrt{n}(\widehat{\sigma^2} - \sigma^2) & = \sqrt{n}(\widehat{\sigma^2} - \frac{n-k}{n} \sigma^2 - \frac{k}{n} \sigma^2) \\ 
+    & = \sqrt{n}(\widehat{\sigma^2} - \frac{n-k}{n} \sigma^2) - \frac{k}{\sqrt{n}} \sigma^2
+    \end{split}\]
+
+    Note that $\widehat{\sigma^2} \equiv n^{-1} \sum_{i=1}^n \hat{e}'\hat{e} $ by definition and that in Chapter 4.11 we have established that 
+    \[
+    \E[\widehat{\sigma^2}] = \frac{n-k}{n} \sigma^2
+    \]
+    Then we can view $\widehat{\sigma^2}$ and $\frac{n-k}{n}$ as a sample mean and its population mean, respectively. This warrants applying the CLT, which states that 
+    \[
+    \sqrt{n}(\widehat{\sigma^2} - \frac{n-k}{n} \sigma^2) \xrightarrow[]{d} \mathcal{N}(0,V)
+    \]
+    where $V=\E[(\widehat{\sigma^2} - \frac{n-k}{n} \sigma^2)^2]$. Lastly, as $- \frac{k}{\sqrt{n}} \sigma^2$ is a constant that converges to $0$, adding it is equivalent to a mean-shift of size $0$. Then
+    \[
+    \sqrt{n}(\widehat{\sigma^2} - \sigma^2) \xrightarrow[]{d} \mathcal{N}(0,V)
+    \]
+
+\end{Exercise}
+
+\end{document}	
