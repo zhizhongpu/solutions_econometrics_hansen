@@ -1,0 +1,193 @@
+\documentclass[12pt,letterpaper,reqno]{amsart}
+\setlength{\oddsidemargin}{.0in}
+\setlength{\evensidemargin}{.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.3in}
+\setlength{\headsep}{.20in}
+\setlength{\textheight}{9.in}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+\usepackage{setspace}
+\doublespace
+
+
+%Here are some user-defined notations
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\newcommand{\I}{\mathbb I}
+
+%improving spacing in tables (space above and below characters in a row)
+\newcommand{\tfix}{\rule{0pt}{2.6ex}}
+\newcommand{\bfix}{\rule[-1.2ex]{0pt}{0pt}}
+
+
+%Here are commands with variable inputs 
+\newcommand{\intf}[1]{\int_a^b{#1}\,dx}
+\newcommand{\intfb}[3]{\int_{#1}^{#2}{#3}\,dx}
+\newcommand{\pln}[1]{$\sm${\tt #1}}
+\newcommand{\bgn}[1]{$\tt {\sm}begin\{#1\}$}
+\newcommand{\nd}[1]{$\tt {\sm}end\{#1\}$}
+\newcommand{\marginalfootnote}[1]{%
+        \footnote{#1}
+        \marginpar[\hfill{\sf\thefootnote}]{{\sf\thefootnote}}}
+\newcommand{\edit}[1]{\marginalfootnote{#1}}
+
+
+\newtheorem*{wellorder*}{Well Ordering Principle}
+%These commands deal with theorem-like environments (i.e., italic)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{wellorder}[theorem]{Well Ordering Principle}
+%\newtheorem{equation}{Theorem}[section]
+%These deal with definition-like environments (i.e., non-italic)
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{Exercise}{Exercise 5.}
+
+%This numbers equations by section
+\numberwithin{equation}{section}
+%\numberwithin{equation}{Theorem}[section]
+
+
+%This is for hypertext references
+\usepackage{color}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\begin{document}
+\author{Zhizhong Pu}
+\title{Solutions - Chapter 5}
+\date{May 2023}
+\maketitle
+
+\thispagestyle{empty}
+
+%% 5.1
+\begin{Exercise} Show that if $Q\sim \chi^2_r$, then $\E[Q]=r$ and $Var[Q]=2r$ 
+
+    First write $Q=\sum_{i=1}^rZ_i$ with $Z_i\sim\mathcal{N}(0,1)$ i.i.d.. Then $\E[Z_i^2]=1$ and $\E[Z_i^4]=3$ are easy to calculate.
+    
+    Then $\E[Q]=r$ and
+    \[
+    Var(Q) = r Var(Z_i^2) = r (\E[Z_i^4] - \E[Z_i^2]^2) = 2r
+    \]
+\end{Exercise}
+
+%% 5.2
+\begin{Exercise} Show that if $e \sim \mathcal{N}(0,\I_n\sigma^2)$ and $H'H=\I_n$ then $u=H'e \sim \mathcal{N}(0,\I_n\sigma^2)$
+
+By Theorem 5.3.3, we have 
+\[
+u = H'e \sim \mathcal{N}(H'0,H'\I_n\sigma^2H) = \mathcal{N}(0,H'H\sigma^2) = \mathcal{N}(0,\I_n\sigma^2)
+\]
+\end{Exercise}
+
+%% 5.3
+\begin{Exercise} Show that if $e \sim \mathcal{N}(0,AA')$ then $u=A^{-1}e \sim \mathcal{N}(0,\I_n)$
+
+By Theorem 5.3.3, we have 
+\[
+u = A^{-1} e \sim \mathcal{N}(A^{-1} 0,A^{-1}AA' (A^{-1})' = \mathcal{N}(0,\I_n)
+\]
+\end{Exercise}
+
+%% 5.4
+\begin{Exercise}\end{Exercise}
+
+%% 5.5
+\begin{Exercise} Show that $\hat{Y}_i|X \sim \mathcal{N}(X'_i\beta,\sigma^2h_i)$ where are the leverage values (3.40).
+    \[
+    \hat{Y} = PY = X(X'X)^{-1}X'(X\beta+e) = X\beta + X(X'X)^{-1}X'e =  X\beta + Pe
+    \]
+    Then
+    \[
+    \hat{Y} \sim \mathcal{N}(X\beta, PPVar(e)) \equiv \mathcal{N}(X\beta, \sigma^2P)
+    \]
+    Since $h_i$ specifies the $i$th diagonal element of $P$, then this shows that $\hat{Y}_i|X \sim \mathcal{N}(X'_i\beta,\sigma^2h_i)$
+
+\end{Exercise}
+
+%% 5.6
+\begin{Exercise} \end{Exercise}
+
+%% 5.7
+\begin{Exercise} In the normal regression model show that the robust covariance matrices $V_{\hat{\beta}}^{HCi}$ are independent of the OLS estimator $\hat{\beta}$, conditional on $X$. 
+
+Recall
+    \[
+    V_{\hat{\beta}}^{HC0} = (X'X)^{-1} (\sum_{i=1}^n X_iX_i' \widehat{e_i^2} ) (X'X^{-1}) 
+    \]
+    \[
+    V_{\hat{\beta}}^{HC1} = \frac{n}{n-k} (X'X)^{-1} (\sum_{i=1}^n X_iX_i' \widehat{e_i^2} ) (X'X^{-1}) 
+    \]
+    \[
+    V_{\hat{\beta}}^{HC2} = (X'X)^{-1} (\sum_{i=1}^n (1-h_i)^{-1} X_iX_i' \widehat{e_i^2} ) (X'X)^{-1}
+    \]
+    \[
+    V_{\hat{\beta}}^{HC3} = (X'X)^{-1} (\sum_{i=1}^n (1-h_i)^{-2} X_iX_i' \widehat{e_i^2} ) (X'X)^{-1}
+    \]
+Then it can be seen that the only stochastic term in each of the variance estimators is $\widehat{e_i^2}$ after conditioning on $X$. By Theorem 5.6, we have $\widehat{e_i^2}$ being independent of $\hat{\beta}$ conditional on $X$. 
+\end{Exercise}
+
+%% 5.8
+\begin{Exercise} Let $F(u)$ be the distribution function of a random variable $X$ whose density is symmetric about $0$. Show that $F(-u) = 1-F(u)$.
+
+    Let $f(u)$ be the p.d.f. of the distribution specified by $F(u)$. We know that $f(u)$ is symmetric about $0$, then $F(0)=0.5$ and for any $x$ on the support of $f$, we have:
+    \[
+    \int_{-u}^0f(x) = \int_0^uf(x) \Rightarrow F(0) - F(-u) = F(u) - F(0) \Rightarrow F(-u) = 1-F(u)
+    \]
+\end{Exercise}
+
+%% 5.9
+\begin{Exercise} Let $\hat{C}_\beta=[L,U]$ be a $1-\alpha$ confidence interval for $\beta$,and consider the transformation where $g()$ is monotonically increasing. Consider the confidence interval $\hat{C}_\theta = [g(L),g(U)]$ for $\theta$. Show that $Pr(\theta \in \hat{C}_\theta) = Pr(\beta \in \hat{C}_\beta)$.
+
+    Note that since $g()$ is monotonically increasing, then $g(x) \le g(L) \Leftrightarrow x \le L$. Then
+    \[
+    Pr(\beta \in \hat{C}_\beta) = Pr(\beta \le U) - Pr(\beta \le L) = Pr(g(\beta) \le g(U)) - Pr(g(\beta) \le g(L)) = Pr(\theta \in \hat{C}_\theta) 
+    \]
+
+\end{Exercise}
+
+%% 5.10
+\begin{Exercise} \end{Exercise}
+
+%% 5.11
+\begin{Exercise} \end{Exercise}
+
+%% 5.12
+\begin{Exercise} In the normal regression model let $s^2$ be the unbiased estimator of the error variance $\sigma^2$ from (4.31). Show that $Var(s^2) = 2\sigma^4 / (n-k)$ and that it is strictly larger than the Cramér-Rao Lower Bound for $\sigma^2$
+
+    By Theorem 5.7 we have
+    \[
+    \frac{(n-k)s^2}{\sigma^2} \sim \chi^2_{n-k}
+    \]
+    Note that the variance of LHS is $2(n-k)$, and $(n-k)$ and $\sigma$ are non-stochastic, so 
+    \[
+    \frac{(n-k)^2}{\sigma^4} Var(s^2) = 2(n-k)
+    \]
+    This shows that $Var(s^2) = 2\sigma^4 / (n-k)$. Note that $k>0$ and the Cramér-Rao Lower Bound for $\sigma^2$ is $2\sigma^4/n$ from (5.20), so $Var(s^2) = 2\sigma^4 / (n-k) > 2\sigma^4/n $
+
+\end{Exercise}
+
+
+\end{document}	
